@@ -55,9 +55,9 @@ class ImageNotifier extends StateNotifier<ImageState> {
   Future<void> initialize() async {
     final hasPermissions = await requestPermissions();
     if (!hasPermissions) {
-      log("Camera and storage permissions granted.");
-    } else {
       log("Camera and/or storage permissions denied.");
+    } else {
+      log("Camera and storage permissions granted.");
     }
   }
 
