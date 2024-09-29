@@ -167,9 +167,6 @@ To install and run this application locally, follow these steps:
 |--|--|
 | <img width="200" alt="Screenshot 2024-09-13 at 4 39 03 PM" src="https://github.com/user-attachments/assets/2a84d369-3e13-4b0c-b111-beaab2a9a538"> | <img width="200" alt="Screenshot 2024-09-13 at 4 39 03 PM" src="https://github.com/user-attachments/assets/bfed43d8-165b-4b35-8f49-0c9f77ceac86"> |
 
-<img width="200" alt="Screenshot 2024-09-13 at 4 39 03 PM" src="https://github.com/user-attachments/assets/d400da85-2485-43c3-a361-97ea91538f88">
-
-
 
 - #### *Assets Image Selection Screen*
 | Select From Assets |
