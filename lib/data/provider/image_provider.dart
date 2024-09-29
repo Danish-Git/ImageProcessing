@@ -68,30 +68,43 @@ class ImageNotifier extends StateNotifier<ImageState> {
   }
 
   Future<void> getImageFromAssets(BuildContext context, String assetImagePath) async {
-    String fileName = assetImagePath.split("/").last;
-    final byteData = await rootBundle.load(assetImagePath);
-    final file = File('${(await getTemporaryDirectory()).path}/$fileName');
-    await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+    if(await requestPermissions()) {
+      String fileName = assetImagePath.split("/").last;
+      final byteData = await rootBundle.load(assetImagePath);
+      final file = File('${(await getTemporaryDirectory()).path}/$fileName');
+      await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
 
-    state = state.copyWith(galleryImage: file);
-    Navigator.pop(context);
+      state = state.copyWith(galleryImage: file);
+      Navigator.pop(context);
+    } else {
+      log("Camera and/or storage permissions denied.");
+    }
   }
 
   Future<void> getImageFromGallery(BuildContext context) async {
     Navigator.pop(context);
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      state = state.copyWith(galleryImage: File(pickedFile.path));
+    if(await requestPermissions()) {
+      final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (pickedFile != null) {
+        state = state.copyWith(galleryImage: File(pickedFile.path));
+      }
+    } else {
+      log("Camera and/or storage permissions denied.");
     }
+
   }
 
   Future<void> getImageFromCamera(BuildContext context) async {
-    final pickedFile = await Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const CaptureCameraImageScreen())
-    );
+    if(await requestPermissions()) {
+      final pickedFile = await Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const CaptureCameraImageScreen())
+      );
 
-    if (pickedFile is String) {
-      state = state.copyWith(cameraImage: File(pickedFile));
+      if (pickedFile is String) {
+        state = state.copyWith(cameraImage: File(pickedFile));
+      }
+    } else {
+      log("Camera and/or storage permissions denied.");
     }
   }
 

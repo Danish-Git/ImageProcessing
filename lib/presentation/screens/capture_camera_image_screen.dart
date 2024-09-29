@@ -18,79 +18,46 @@ class CaptureCameraImageScreen extends ConsumerWidget {
         child: cameraState.when(
           loading: () => const CircularProgressIndicator(),
           error: (error, _) => Text('Error: $error'),
-          data: (controller) => Material(
-            color: Colors.white,
-            child: InkWell(
-              onLongPress: () async {
-                final picture = await ref.read(cameraProvider.notifier).takePicture();
-                if (picture != null) {
-                  Navigator.pop(context, picture.path);
-                }
-              },
-              child: CameraPreview(controller),
-            ),
+          data: (controller) => Stack(
+            children: [
+              Center(
+                child: Material(
+                  color: Colors.white,
+                  child: InkWell(
+                    onLongPress: () async {
+                      final picture = await ref.read(cameraProvider.notifier).takePicture();
+                      if (picture != null) {
+                        Navigator.pop(context, picture.path);
+                      }
+                    },
+                    child: CameraPreview(controller),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: Container(
+                  color: Colors.grey,
+                  padding: const EdgeInsets.only(top: 20, bottom: 20),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Long press on camera view to capture image",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
           ),
         ),
       ),
     );
   }
 }
-
-
-/*
-class CaptureCameraImageScreen extends StatefulWidget {
-  const CaptureCameraImageScreen({super.key});
-
-  @override
-  State<CaptureCameraImageScreen> createState() => _CaptureCameraImageScreenState();
-}
-
-class _CaptureCameraImageScreenState extends State<CaptureCameraImageScreen> {
-  CameraController? _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _initializeCamera();
-  }
-
-  Future<void> _initializeCamera() async {
-    try {
-      CameraDescription availableCamera = (await availableCameras()).firstWhere((camera) => camera.lensDirection == CameraLensDirection.front);
-      _controller = CameraController(availableCamera, ResolutionPreset.max);
-      await _controller?.initialize();
-      setState(() {});
-    } catch (e) {
-      log('Error initializing camera: $e');
-    }
-  }
-
-  Future<void> _takePicture() async {
-    final XFile picture = await _controller!.takePicture();
-    Navigator.pop(context, picture.path);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Capture Image')),
-      body: Center(
-        child: (!(_controller?.value.isInitialized ?? false))
-          ? const CircularProgressIndicator()
-          : Material(
-            color: Colors.white,
-            child: InkWell(
-              onLongPress: _takePicture,
-              child: CameraPreview(_controller!)
-            )
-        ),
-    ));
-  }
-
-  @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
-  }
-}
-*/

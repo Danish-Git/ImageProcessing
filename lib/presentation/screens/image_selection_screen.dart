@@ -70,20 +70,20 @@ class ImageSelectionScreen extends ConsumerWidget {
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(bottom: 10),
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(color: Colors.red,),
                   ),
                   if (state.mergingStatus == MergingStatus.loading)
                     const Text("Initializing...",
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16, color: Colors.white)),
+                        style: TextStyle(fontSize: 16, color: Colors.black)),
                   if (state.mergingStatus == MergingStatus.resizing)
                     const Text("Resizing images...",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16, color: Colors.white)),
+                      style: TextStyle(fontSize: 16, color: Colors.black)),
                   if (state.mergingStatus == MergingStatus.merging)
                     const Text("Merging images...",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16, color: Colors.white)),
+                      style: TextStyle(fontSize: 16, color: Colors.black)),
                   if (state.mergingStatus == MergingStatus.error)
                     const Text("Error merging images!",
                         textAlign: TextAlign.center,
