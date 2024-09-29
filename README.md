@@ -16,29 +16,29 @@ The code is structured using Clean Architecture principles, which separate the a
 
 ### Directory Structure
 
-lib/
-│
-├── data/
-│   ├── provider/
-│   |   ├── camera_provider.dart
-│   |   └── image_provider.dart
-│   ├── repositories/
-│   |   ├── camera_repositories.dart
-│   |   └── image_repositories.dart
-│   └── services/
-│       ├── camera_service.dart
-│       └── permission_service.dart
-│
-├── domain/
-│   └── image_use_case.dart
-│
-├── presentation/
-│   └── screens/
-│       ├── capture_camera_image_screen.dart
-│       ├── image_selection_screen.dart
-│       └── merged_image_screen.dart
-│
-└── main.dart
+    lib/
+    │
+    ├── data/
+    │   ├── provider/
+    │   |   ├── camera_provider.dart
+    │   |   └── image_provider.dart
+    │   ├── repositories/
+    │   |   ├── camera_repositories.dart
+    │   |   └── image_repositories.dart
+    │   └── services/
+    │       ├── camera_service.dart
+    │       └── permission_service.dart
+    │
+    ├── domain/
+    │   └── image_use_case.dart
+    │
+    ├── presentation/
+    │   └── screens/
+    │       ├── capture_camera_image_screen.dart
+    │       ├── image_selection_screen.dart
+    │       └── merged_image_screen.dart
+    │
+    └── main.dart
 
 
 ## App Flow Chart
@@ -58,65 +58,70 @@ The flow of the application can be visualized as follows:
 5. **Display Merged Image**:
    - Once merged, the new image is displayed to the user.
 
-+---------------------+
-|        User         |
-+---------------------+
-          |
-          | Selects Image
-          v
-+--------------------------+
-|     P1: Image Selection  |
-+--------------------------+
-| - Get Image from Gallery |
-|                          |
-| - Get Image from Camera  |
-|                          |
-+--------------------------+
-          |
-          |  Gallery Image Selected
-          |  Camera Image Captured
-          v
-+--------------------------+
-|       DS1: Image         |
-|      Repository          |
-+--------------------------+
-          |
-          | Contains: Gallery Image
-          | Contains: Camera Image
-          v
-+--------------------------+
-|      P2: Image Merging   |
-+--------------------------+
-| - Merges images from     |
-|   DS1 (Gallery & Camera) |
-| - Outputs merged image   |
-+--------------------------+
-          |
-          | Merged Image Output
-          v
-+--------------------------+
-|   DS2: Merged Image      |
-|         Store            |
-+--------------------------+
-          |
-          | Merged Image
-          v
-+--------------------------+
-|    P3: Display Merged    |
-|        Image             |
-+--------------------------+
-| - Displays merged image  |
-+--------------------------+
-          |
-          | Merged Image Displayed
-          v
-+--------------------------+
-|     P4: Handle Errors    |
-+--------------------------+
-| - Error handling during  |
-|   image selection and    |
-|   merging processes      |
-+--------------------------+
+  
+   ## Flow Chart
+
+
+   ```bash
+          +--------------------------------+
+          |               User             |
+          +--------------------------------+
+                           |
+                           | Selects Image
+                           v
+        +-------------------------------------+
+        |            Image Selection          |
+        +-------------------------------------+
+        | - Get Image from Gallery            |
+        |                                     |
+        | - Get Image from Camera             |
+        |                                     |
+        +-------------------------------------+
+                           |
+                           |  Gallery Image Selected
+                           |  Camera Image Captured
+                           v
+        +-------------------------------------+
+        |              DS1: Image             |
+        |              Repository             |
+        +-------------------------------------+
+                           |
+                           | Contains: Gallery Image
+                           | Contains: Camera Image
+                           v
+        +-------------------------------------+
+        |          P2: Image Merging          |
+        +-------------------------------------+
+        | - Merges images from                |
+        |      DS1 (Gallery & Camera)         |
+        | - Outputs merged image              |
+        +-------------------------------------+
+                           |
+                           | Merged Image Output
+                           v
+        +-------------------------------------+
+        |          DS2: Merged Image          |
+        |                Store                |
+        +-------------------------------------+
+                          |
+                          | Merged Image
+                          v
+        +-------------------------------------+
+        |          P3: Display Merged         |
+        |               Image                 |
+        +-------------------------------------+
+        | - Displays merged image             |
+        +-------------------------------------+
+                         |
+                         | Merged Image Displayed
+                         v
+        +-------------------------------------+
+        |          P4: Handle Errors          |
+        +-------------------------------------+
+        | - Error handling during             |
+        |     image selection and             |
+        |     merging processes               |
+        +-------------------------------------+
 
 
 ## Installation
@@ -154,23 +159,43 @@ To install and run this application locally, follow these steps:
 
 - **User-Friendly UI**: 
   - An intuitive layout with clear prompts and feedback for user actions, ensuring a smooth and enjoyable user experience.
+ 
+## Screens
+
+- #### *Image Selection Screen*
+| Before Image Selection | After Image Selection |
+|--|--|
+| <img width="200" alt="Screenshot 2024-09-13 at 4 39 03 PM" src="https://github.com/user-attachments/assets/2a84d369-3e13-4b0c-b111-beaab2a9a538"> | <img width="200" alt="Screenshot 2024-09-13 at 4 39 03 PM" src="https://github.com/user-attachments/assets/bfed43d8-165b-4b35-8f49-0c9f77ceac86"> |
+
+<img width="200" alt="Screenshot 2024-09-13 at 4 39 03 PM" src="https://github.com/user-attachments/assets/d400da85-2485-43c3-a361-97ea91538f88">
 
 
-## Future Enhancements
 
-This application is designed to be easily extendable, allowing for future features such as:
-
-- **Filters for Images**: 
-  - Implement various filters to enhance and modify images, providing users with creative editing options.
-
-- **Additional Image Processing Functionalities**: 
-  - Explore and integrate more advanced image processing techniques, such as resizing, cropping, and effects.
-
-- **Sharing Capabilities**: 
-  - Enable users to share their edited images directly to social media platforms, enhancing connectivity and sharing.
-
-- **User Settings**: 
-  - Introduce user settings for customizing the app experience, allowing users to tailor the application to their preferences.
+- #### *Assets Image Selection Screen*
+| Select From Assets |
+|--|
+| <img width="200" alt="Screenshot 2024-09-13 at 4 39 03 PM" src="https://github.com/user-attachments/assets/da128053-1e53-42b5-aaa8-1371c24eed83"> |
 
 
-This application is designed to be easily extendable, allowing for future features such as filters, additional image processing functionalities, or sharing capabilities. Enjoy exploring and utilizing the image processing capabilities!
+- #### *Gallery Image Selection Section*
+| Select From Gallery |
+|--|
+| <img width="200" alt="Screenshot 2024-09-13 at 4 39 03 PM" src="https://github.com/user-attachments/assets/bf0b523d-1a82-43f1-8024-840b3cc29d4b"> |
+
+
+- #### *Capture Image Using Camera Screen*
+| Capture Image |
+|--|
+| <img width="200" alt="Screenshot 2024-09-13 at 4 39 03 PM" src="https://github.com/user-attachments/assets/372d2fcb-82c4-449f-b38a-b3f595c5794a"> |
+
+
+- #### *Image Processing Screen*
+| Processing |
+|--|
+| <img width="200" alt="Screenshot 2024-09-13 at 4 39 03 PM" src="https://github.com/user-attachments/assets/b7ad8827-1d43-4a54-9e37-8439e62e5bc5"> |
+
+
+- #### *Final Processed Image Representation Screen*
+| Merged Image |
+|--|
+| <img width="200" alt="Screenshot 2024-09-13 at 4 39 03 PM" src="https://github.com/user-attachments/assets/e9d6114a-7cc1-4d2c-9dce-58a2bd7a914f"> |
