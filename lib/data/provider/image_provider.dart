@@ -77,7 +77,11 @@ class ImageNotifier extends StateNotifier<ImageState> {
       state = state.copyWith(galleryImage: file);
       Navigator.pop(context);
     } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Camera and/or storage permissions denied!'),
+      ));
       log("Camera and/or storage permissions denied.");
+      Navigator.pop(context);
     }
   }
 
@@ -89,6 +93,9 @@ class ImageNotifier extends StateNotifier<ImageState> {
         state = state.copyWith(galleryImage: File(pickedFile.path));
       }
     } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Camera and/or storage permissions denied!'),
+      ));
       log("Camera and/or storage permissions denied.");
     }
 
@@ -104,6 +111,9 @@ class ImageNotifier extends StateNotifier<ImageState> {
         state = state.copyWith(cameraImage: File(pickedFile));
       }
     } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Camera and/or storage permissions denied!'),
+      ));
       log("Camera and/or storage permissions denied.");
     }
   }
